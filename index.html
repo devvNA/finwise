@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Finwise, simulasi keuangan pribadi dan kredit untuk pengambilan keputusan yang lebih bertanggung jawab."
+    />
+    <title>Finwise | Kalkulator Keuangan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#dashboard" data-nav="dashboard" aria-label="Finwise dashboard">
+          <span class="brand-mark">F</span>
+          <span>finwise<small>make money clearer</small></span>
+        </a>
+        <nav aria-label="Navigasi utama">
+          <button class="nav-link active" data-nav="dashboard"><span>01</span>Ringkasan</button>
+          <button class="nav-link" data-nav="affordability"><span>02</span>Kemampuan cicilan</button>
+          <button class="nav-link" data-nav="credit"><span>03</span>Simulasi kredit</button>
+          <button class="nav-link" data-nav="comparison"><span>04</span>Bandingkan opsi</button>
+          <button class="nav-link" data-nav="emergency"><span>05</span>Dana darurat</button>
+          <button class="nav-link" data-nav="education"><span>06</span>Belajar dasar</button>
+          <button class="nav-link" data-nav="history"><span>07</span>Riwayat</button>
+          <button class="nav-link" data-nav="information"><span>08</span>Catatan penting</button>
+        </nav>
+        <div class="sidebar-note">
+          <strong>Keputusan lebih tenang.</strong>
+          <p>Mulai dari angka yang Anda masukkan, bukan dari promosi.</p>
+        </div>
+      </aside>
+
+      <div class="page">
+        <header class="topbar">
+          <button class="menu-button" id="menu-button" aria-label="Buka navigasi" aria-expanded="false">Menu</button>
+          <div class="breadcrumb"><span id="section-index">01</span><span id="section-title">Ringkasan</span></div>
+          <div class="profile"><span class="profile-dot"></span><span>Ruang pribadi</span></div>
+        </header>
+
+        <main>
+          <section class="view active" id="dashboard" data-view="dashboard">
+            <div class="page-intro">
+              <p class="eyebrow">Gambaran bulan ini</p>
+              <h1>Uang Anda punya arah.<br /><em>Pastikan masih ada ruang.</em></h1>
+              <p>Masukkan kondisi bulanan untuk melihat kebutuhan, cicilan, dan ruang bernapas Anda.</p>
+            </div>
+            <div class="dashboard-grid">
+              <form class="card input-card" id="dashboard-form">
+                <div class="card-heading"><div><p class="eyebrow">Input utama</p><h2>Arus kas bulanan</h2></div><button type="reset" class="text-button" data-reset="dashboard">Reset</button></div>
+                <div class="field-grid">
+                  <label>Penghasilan bersih<input name="income" type="text" inputmode="numeric" data-money value="3000000" /></label>
+                  <label>Kebutuhan pokok<input name="essentials" type="text" inputmode="numeric" data-money value="1500000" /></label>
+                  <label>Pengeluaran rutin<input name="recurring" type="text" inputmode="numeric" data-money value="300000" /></label>
+                  <label>Cicilan berjalan<input name="existingInstallments" type="text" inputmode="numeric" data-money value="0" /></label>
+                  <label>Tabungan bulanan<input name="savings" type="text" inputmode="numeric" data-money value="300000" /></label>
+                  <label>Target rasio cicilan<select name="targetRatio"><option value="10">10% konservatif</option><option value="15" selected>15% konservatif</option><option value="20">20%</option><option value="25">25%</option></select></label>
+                </div>
+                <p class="form-hint">Rasio 10-15% adalah panduan konservatif Finwise, bukan ketentuan resmi OJK.</p>
+              </form>
+              <article class="card financial-pulse">
+                <div class="card-heading"><div><p class="eyebrow">Sisa setelah komitmen</p><h2 id="residual-income">Rp0</h2></div><span class="pulse-label" id="dashboard-status">Memuat</span></div>
+                <div class="donut-row">
+                  <div class="donut" id="spending-donut" role="img" aria-label="Komposisi arus kas"><strong id="expense-ratio">0%</strong><span>kebutuhan</span></div>
+                  <ul class="legend">
+                    <li><i class="legend-essential"></i>Kebutuhan <strong id="legend-essential">Rp0</strong></li>
+                    <li><i class="legend-recurring"></i>Rutin <strong id="legend-recurring">Rp0</strong></li>
+                    <li><i class="legend-saving"></i>Tabungan <strong id="legend-saving">Rp0</strong></li>
+                  </ul>
+                </div>
+                <div class="capacity-meter"><div><span>Ruang cicilan tambahan</span><strong id="capacity-amount">Rp0</strong></div><div class="meter"><span id="capacity-meter"></span></div><small id="capacity-copy">Hitung berdasarkan arus kas dan batas rasio.</small></div>
+              </article>
+            </div>
+            <div class="metric-grid">
+              <article class="metric-card"><span>Total pengeluaran</span><strong id="metric-expenses">Rp0</strong><small>Kebutuhan dan rutin</small></article>
+              <article class="metric-card"><span>Rasio pengeluaran</span><strong id="metric-expense-ratio">0%</strong><small>Dari penghasilan bersih</small></article>
+              <article class="metric-card"><span>DTI saat ini</span><strong id="metric-dti">0%</strong><small>Cicilan terhadap penghasilan</small></article>
+              <article class="metric-card"><span>Potensi tabungan</span><strong id="metric-savings">Rp0</strong><small>Sebelum belanja fleksibel</small></article>
+            </div>
+            <article class="card cashflow-card">
+              <div class="card-heading"><div><p class="eyebrow">Alur uang sederhana</p><h2>Setiap Rp100 penghasilan</h2></div><span class="muted">Simulasi bulan berjalan</span></div>
+              <div class="cashflow-bars" id="cashflow-bars"></div>
+            </article>
+          </section>
+
+          <section class="view" id="affordability" data-view="affordability">
+            <div class="page-intro compact"><p class="eyebrow">Sebelum menambah cicilan</p><h1>Uji ruang bayar,<br /><em>bukan hanya batas kredit.</em></h1></div>
+            <div class="split-layout">
+              <form class="card input-card" id="affordability-form">
+                <div class="card-heading"><div><p class="eyebrow">Parameter kemampuan</p><h2>Yang wajib tetap aman</h2></div><button type="reset" class="text-button" data-reset="affordability">Reset</button></div>
+                <div class="field-grid">
+                  <label>Penghasilan bersih<input name="income" type="text" inputmode="numeric" data-money value="3000000" /></label>
+                  <label>Kebutuhan pokok<input name="essentials" type="text" inputmode="numeric" data-money value="1500000" /></label>
+                  <label>Pengeluaran rutin<input name="recurring" type="text" inputmode="numeric" data-money value="300000" /></label>
+                  <label>Cicilan berjalan<input name="existingInstallments" type="text" inputmode="numeric" data-money value="0" /></label>
+                  <label>Tabungan wajib<input name="savings" type="text" inputmode="numeric" data-money value="300000" /></label>
+                  <label>Dana buffer<input name="buffer" type="text" inputmode="numeric" data-money value="200000" /></label>
+                  <label>Target maksimal rasio<select name="targetRatio"><option value="10">10%</option><option value="15" selected>15%</option><option value="20">20%</option><option value="25">25%</option><option value="custom">Custom</option></select></label>
+                  <label class="custom-ratio hidden">Rasio custom (%)<input name="customRatio" type="number" min="0" max="100" value="15" /></label>
+                </div>
+              </form>
+              <article class="card affordability-result">
+                <p class="eyebrow">Kemampuan cicilan tambahan</p>
+                <strong class="hero-number" id="max-installment">Rp0</strong>
+                <p id="affordability-summary">Masukkan kondisi keuangan untuk melihat ruang yang tersedia.</p>
+                <div class="result-list">
+                  <div><span>Batas dari penghasilan</span><strong id="income-cap">Rp0</strong></div>
+                  <div><span>Sisa setelah komitmen</span><strong id="disposable-income">Rp0</strong></div>
+                  <div><span>Rasio cicilan saat ini</span><strong id="current-dti">0%</strong></div>
+                  <div><span>Saran cicilan nyaman</span><strong id="recommended-installment">Rp0</strong></div>
+                </div>
+                <div class="status-banner" id="affordability-status" role="status"></div>
+                <button class="secondary-button" id="use-max-installment" type="button">Gunakan pada simulasi kredit</button>
+              </article>
+            </div>
+          </section>
+
+          <section class="view" id="credit" data-view="credit">
+            <div class="page-intro compact"><p class="eyebrow">Simulasi produk</p><h1>Lihat biaya lengkap,<br /><em>bukan angka cicilan saja.</em></h1></div>
+            <div class="credit-grid">
+              <form class="card input-card" id="loan-form">
+                <div class="card-heading"><div><p class="eyebrow">Kalkulator pembiayaan</p><h2>Parameter simulasi</h2></div><button type="reset" class="text-button" data-reset="loan">Reset</button></div>
+                <div class="field-grid">
+                  <label>Jenis produk<select name="product"><option value="PayLater">PayLater / BNPL</option><option value="Credit Card">Kartu kredit</option><option value="Pindar">Pindar</option><option value="DANA CICIL">DANA CICIL / sejenis</option><option value="KTA">Kredit Tanpa Agunan</option><option value="Multifinance">Multifinance</option></select></label>
+                  <label>Harga / jumlah pinjaman<input name="price" type="text" inputmode="numeric" data-money value="5000000" /></label>
+                  <label>Uang muka<input name="downPayment" type="text" inputmode="numeric" data-money value="2000000" /></label>
+                  <label>Pokok pembiayaan<input name="principal" type="text" inputmode="numeric" data-money value="3000000" /></label>
+                  <label>Tenor (periode)<input name="tenor" type="number" min="1" value="6" /></label>
+                  <label>Metode bunga<select name="method"><option value="annuity">Efektif anuitas</option><option value="flat">Flat</option><option value="daily">Harian sederhana</option></select></label>
+                  <label>Bunga per periode (%)<input name="rate" type="number" min="0" step="0.01" value="0" /></label>
+                  <label>Interval pembayaran<select name="intervalDays"><option value="30">Bulanan (30 hari)</option><option value="14">Dua mingguan</option><option value="7">Mingguan</option><option value="custom">Custom</option></select></label>
+                  <label class="custom-interval hidden">Interval custom (hari)<input name="customInterval" type="number" min="1" value="30" /></label>
+                  <label>Biaya administrasi<input name="adminFee" type="text" inputmode="numeric" data-money value="0" /></label>
+                  <label>Biaya layanan<input name="serviceFee" type="text" inputmode="numeric" data-money value="0" /></label>
+                  <label>Asuransi<input name="insuranceFee" type="text" inputmode="numeric" data-money value="0" /></label>
+                  <label>Biaya lain<input name="extraFee" type="text" inputmode="numeric" data-money value="0" /></label>
+                  <label>Tanggal mulai<input name="startDate" type="date" /></label>
+                </div>
+                <p class="form-hint">Biaya dan bunga adalah input simulasi. Ketentuan sebenarnya mengikuti perjanjian penyedia.</p>
+              </form>
+              <article class="card credit-result">
+                <p class="eyebrow">Hasil estimasi</p>
+                <strong class="hero-number" id="loan-installment">Rp0</strong><span class="sub-number">per periode termasuk pembagian biaya</span>
+                <div class="result-list">
+                  <div><span>Pokok pembiayaan</span><strong id="loan-principal">Rp0</strong></div>
+                  <div><span>Total bunga</span><strong id="loan-interest">Rp0</strong></div>
+                  <div><span>Total biaya tambahan</span><strong id="loan-fees">Rp0</strong></div>
+                  <div><span>Total pembayaran</span><strong id="loan-total">Rp0</strong></div>
+                  <div><span>Total biaya kredit</span><strong id="loan-cost">Rp0</strong></div>
+                </div>
+                <div class="status-banner neutral" id="loan-validation">Simulasi edukatif, bukan penawaran resmi.</div>
+                <div class="inline-actions"><button class="primary-button" id="save-simulation" type="button">Simpan simulasi</button><button class="secondary-button" id="download-report" type="button">Unduh ringkasan</button></div>
+              </article>
+            </div>
+            <div class="module-grid">
+              <form class="card mini-calculator" id="card-form">
+                <div class="card-heading"><div><p class="eyebrow">Kartu kredit</p><h2>Bayar penuh atau sebagian</h2></div></div>
+                <div class="field-grid compact-fields">
+                  <label>Total transaksi<input name="transaction" type="text" inputmode="numeric" data-money value="1000000" /></label>
+                  <label>Pembayaran Anda<input name="payment" type="text" inputmode="numeric" data-money value="100000" /></label>
+                  <label>Minimum pembayaran (%)<input name="minimumPercent" type="number" min="0" value="10" /></label>
+                  <label>Bunga estimasi / bulan (%)<input name="monthlyRate" type="number" min="0" step="0.01" value="1.75" /></label>
+                  <label>Tanggal transaksi<input name="transactionDate" type="date" /></label>
+                  <label>Tanggal cetak tagihan<input name="statementDate" type="date" /></label>
+                  <label>Tanggal jatuh tempo<input name="dueDate" type="date" /></label>
+                </div>
+                <div class="mini-output" id="card-result"></div>
+                <p class="form-hint">Masa bebas bunga dan minimum pembayaran bergantung pada bank, transaksi, dan perjanjian kartu.</p>
+              </form>
+              <form class="card mini-calculator" id="pindar-form">
+                <div class="card-heading"><div><p class="eyebrow">Pindar</p><h2>Biaya harian</h2></div></div>
+                <div class="field-grid compact-fields">
+                  <label>Dana diterima<input name="disbursedAmount" type="text" inputmode="numeric" data-money value="1000000" /></label>
+                  <label>Biaya per hari (%)<input name="dailyRate" type="number" min="0" step="0.01" value="0.2" /></label>
+                  <label>Lama pinjaman (hari)<input name="days" type="number" min="1" value="10" /></label>
+                  <label>Biaya lain<input name="otherFees" type="text" inputmode="numeric" data-money value="0" /></label>
+                </div>
+                <div class="mini-output" id="pindar-result"></div>
+                <p class="form-hint">Batas biaya dapat berubah. Tarif maksimum bukan tarif wajib semua penyedia.</p>
+              </form>
+              <form class="card mini-calculator" id="paylater-form">
+                <div class="card-heading"><div><p class="eyebrow">PayLater</p><h2>Bandingkan tenor</h2></div></div>
+                <div class="field-grid compact-fields">
+                  <label>Harga transaksi<input name="amount" type="text" inputmode="numeric" data-money value="1500000" /></label>
+                  <label>Biaya layanan<input name="serviceFee" type="text" inputmode="numeric" data-money value="0" /></label>
+                  <label>Bunga 3 bulan (%)<input name="rate3" type="number" min="0" step="0.01" value="0" /></label>
+                  <label>Bunga 6 bulan (%)<input name="rate6" type="number" min="0" step="0.01" value="0" /></label>
+                  <label>Bunga 12 bulan (%)<input name="rate12" type="number" min="0" step="0.01" value="0" /></label>
+                </div>
+                <div class="mini-output plan-grid" id="paylater-result"></div>
+              </form>
+            </div>
+            <article class="card schedule-card">
+              <div class="card-heading"><div><p class="eyebrow">Jadwal pembayaran</p><h2>Amortisasi simulasi</h2></div><div class="inline-actions"><button class="text-button" id="download-csv" type="button">Unduh CSV</button><button class="text-button" id="print-report" type="button">Cetak</button></div></div>
+              <div class="table-scroll"><table><thead><tr><th>No.</th><th>Jatuh tempo</th><th>Saldo awal</th><th>Pokok</th><th>Bunga</th><th>Pembayaran</th><th>Saldo akhir</th></tr></thead><tbody id="schedule-body"></tbody></table></div>
+            </article>
+          </section>
+
+          <section class="view" id="comparison" data-view="comparison">
+            <div class="page-intro compact"><p class="eyebrow">Bandingkan sebelum setuju</p><h1>Cicilan rendah belum tentu<br /><em>biaya paling rendah.</em></h1></div>
+            <div class="comparison-toolbar card">
+              <label>Barang yang dibandingkan<input id="comparison-item" type="text" value="Laptop" /></label>
+              <label>Harga tunai<input id="cash-price" type="text" inputmode="numeric" data-money value="5000000" /></label>
+              <label>Urutkan berdasarkan<select id="comparison-sort"><option value="cost">Total biaya kredit</option><option value="installment">Cicilan terendah</option><option value="tenor">Tenor terpendek</option></select></label>
+              <button class="secondary-button" id="add-offer" type="button">Tambah opsi</button>
+            </div>
+            <div class="offer-grid" id="offer-grid"></div>
+            <article class="card comparison-table-card">
+              <div class="card-heading"><div><p class="eyebrow">Tabel keputusan</p><h2 id="comparison-heading">Perbandingan pembiayaan</h2></div><span class="muted">Maksimum lima opsi</span></div>
+              <div class="table-scroll"><table id="comparison-table"><thead></thead><tbody></tbody></table></div>
+              <div class="comparison-insight" id="comparison-insight"></div>
+            </article>
+          </section>
+
+          <section class="view" id="emergency" data-view="emergency">
+            <div class="page-intro compact"><p class="eyebrow">Jaring pengaman</p><h1>Jangan pakai cicilan untuk<br /><em>menutup keadaan darurat.</em></h1></div>
+            <div class="split-layout">
+              <form class="card input-card" id="emergency-form">
+                <div class="card-heading"><div><p class="eyebrow">Rencana dana darurat</p><h2>Target yang realistis</h2></div><button type="reset" class="text-button" data-reset="emergency">Reset</button></div>
+                <div class="field-grid">
+                  <label>Pengeluaran wajib bulanan<input name="essentialExpenses" type="text" inputmode="numeric" data-money value="1500000" /></label>
+                  <label>Jumlah tanggungan<input name="dependents" type="number" min="0" value="0" /></label>
+                  <label>Target perlindungan<select name="targetMonths"><option value="3">3 bulan</option><option value="6" selected>6 bulan</option><option value="12">12 bulan</option></select></label>
+                  <label>Tabungan saat ini<input name="currentSavings" type="text" inputmode="numeric" data-money value="0" /></label>
+                  <label>Alokasi per bulan<input name="monthlyAllocation" type="text" inputmode="numeric" data-money value="300000" /></label>
+                </div>
+              </form>
+              <article class="card emergency-result">
+                <p class="eyebrow">Progres dana darurat</p><strong class="hero-number" id="emergency-progress">0%</strong><p id="emergency-copy">Target dibentuk dari pengeluaran wajib.</p>
+                <div class="progress-line"><span id="emergency-meter"></span></div>
+                <div class="result-list"><div><span>Target dana</span><strong id="emergency-target">Rp0</strong></div><div><span>Kekurangan</span><strong id="emergency-remaining">Rp0</strong></div><div><span>Estimasi waktu</span><strong id="emergency-time">-</strong></div></div>
+                <div class="status-banner neutral">Pisahkan dana darurat dari uang cicilan agar keduanya tidak saling mengganggu.</div>
+              </article>
+            </div>
+          </section>
+
+          <section class="view" id="education" data-view="education">
+            <div class="page-intro compact"><p class="eyebrow">Pusat belajar</p><h1>Istilah kredit,<br /><em>dijelaskan tanpa berputar-putar.</em></h1><p>Pilih topik untuk melihat cara kerja, contoh, manfaat, risiko, dan tips sederhana.</p></div>
+            <div class="education-grid" id="education-grid"></div>
+          </section>
+
+          <section class="view" id="history" data-view="history">
+            <div class="page-intro compact"><p class="eyebrow">Tersimpan di perangkat ini</p><h1>Riwayat simulasi<br /><em>yang bisa Anda tinjau lagi.</em></h1></div>
+            <div class="history-list card" id="history-list"></div>
+          </section>
+
+          <section class="view" id="information" data-view="information">
+            <div class="page-intro compact"><p class="eyebrow">Batasan aplikasi</p><h1>Simulasi membantu membaca angka,<br /><em>bukan menggantikan perjanjian.</em></h1></div>
+            <div class="info-grid">
+              <article class="card"><p class="eyebrow">Disclaimer</p><p class="large-copy">Seluruh hasil kalkulasi merupakan simulasi edukatif berdasarkan informasi yang dimasukkan pengguna. Hasil bukan penawaran pembiayaan, keputusan persetujuan kredit, ataupun nasihat keuangan profesional. Biaya, bunga, denda, metode pembayaran, dan syarat produk sebenarnya mengikuti perjanjian resmi penyedia.</p></article>
+              <article class="card"><p class="eyebrow">Sumber resmi</p><ul class="source-list"><li><a href="https://www.ojk.go.id/" target="_blank" rel="noreferrer">Otoritas Jasa Keuangan (OJK)</a></li><li><a href="https://find.ojk.go.id/" target="_blank" rel="noreferrer">FIND OJK</a></li><li><a href="https://www.bi.go.id/" target="_blank" rel="noreferrer">Bank Indonesia</a></li><li><a href="https://idebku.ojk.go.id/" target="_blank" rel="noreferrer">iDebKu OJK</a></li></ul><p class="form-hint">Pembaruan informasi regulasi: 25 November 2026. Periksa sumber resmi sebelum mengambil keputusan.</p></article>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
