@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Finwise</title>
+  <path fill="#102c40" d="M128 16C67 16 18 65 18 126v74c0 22 18 40 40 40h70c61 0 110-49 110-110S189 16 128 16Z"/>
+  <path fill="#d7ebe9" d="M82 62h98v35h-58v20h47v34h-47v43H82Z"/>
+</svg>
